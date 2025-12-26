@@ -18,8 +18,8 @@ const CategoryFilter = ({ activeCategory, onSelectCategory }) => {
                         style={{
                             padding: '0.75rem 1.5rem',
                             borderRadius: 'var(--radius-full)',
-                            backgroundColor: activeCategory === cat.id ? 'var(--primary)' : 'white',
-                            color: activeCategory === cat.id ? 'white' : 'var(--text-main)',
+                            backgroundColor: activeCategory === cat.id ? 'var(--primary)' : 'var(--surface)',
+                            color: activeCategory === cat.id ? '#0f172a' : 'var(--text-main)',
                             border: '1px solid',
                             borderColor: activeCategory === cat.id ? 'var(--primary)' : 'var(--border)',
                             whiteSpace: 'nowrap',

@@ -4,8 +4,8 @@ const Header = () => {
     return (
         <header style={{
             borderBottom: '1px solid var(--border)',
-            backgroundColor: 'rgba(255, 255, 255, 0.8)',
-            backdropFilter: 'blur(8px)',
+            backgroundColor: 'rgba(15, 23, 42, 0.8)',
+            backdropFilter: 'blur(12px)',
             position: 'sticky',
             top: 0,
             zIndex: 50
