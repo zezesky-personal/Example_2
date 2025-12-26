@@ -9,12 +9,28 @@ import { doctors as initialDoctors } from './data/mockDoctors'
 function App() {
   const [activeCategory, setActiveCategory] = useState('all')
   const [searchQuery, setSearchQuery] = useState('')
-  const [filteredDoctors, setFilteredDoctors] = useState(initialDoctors)
+  const [doctors, setDoctors] = useState([])
+  const [filteredDoctors, setFilteredDoctors] = useState([])
   const [selectedDoctor, setSelectedDoctor] = useState(null)
+
+  // Fetch data from API
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const docRes = await fetch('http://localhost:3001/api/doctors')
+        const docs = await docRes.json()
+        setDoctors(docs)
+        setFilteredDoctors(docs)
+      } catch (error) {
+        console.error("Error fetching data:", error)
+      }
+    }
+    fetchData()
+  }, [])
 
   // Filter Logic
   useEffect(() => {
-    let result = initialDoctors
+    let result = doctors
 
     // Filter by category
     if (activeCategory !== 'all') {
@@ -33,7 +49,7 @@ function App() {
     }
 
     setFilteredDoctors(result)
-  }, [activeCategory, searchQuery])
+  }, [activeCategory, searchQuery, doctors])
 
   const handleSearch = (query) => {
     setSearchQuery(query)
