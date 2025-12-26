@@ -10,16 +10,17 @@ const Hero = ({ onSearch, onLocate }) => {
 
     return (
         <section style={{
-            background: 'linear-gradient(135deg, var(--primary-light) 0%, white 100%)',
+            background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)',
             padding: '4rem 0 6rem',
-            textAlign: 'center'
+            textAlign: 'center',
+            borderBottom: '1px solid var(--border)'
         }}>
             <div className="container">
                 <h1 style={{
                     fontSize: '3rem',
                     fontWeight: '800',
                     marginBottom: '1rem',
-                    color: 'var(--text-main)',
+                    color: 'white',
                     letterSpacing: '-1px'
                 }}>
                     Find the right care, right now.
@@ -41,10 +42,11 @@ const Hero = ({ onSearch, onLocate }) => {
                     position: 'relative',
                     display: 'flex',
                     gap: '8px',
-                    background: 'white',
+                    background: 'var(--surface)',
                     padding: '8px',
                     borderRadius: '12px',
-                    boxShadow: 'var(--shadow-lg)'
+                    boxShadow: 'var(--shadow-lg)',
+                    border: '1px solid var(--border)'
                 }}>
                     <form style={{ flex: 1 }} onSubmit={handleSubmit}>
                         <input
@@ -59,7 +61,9 @@ const Hero = ({ onSearch, onLocate }) => {
                                 outline: 'none',
                                 padding: '0 1rem',
                                 fontSize: '1rem',
-                                borderRadius: '8px'
+                                borderRadius: '8px',
+                                backgroundColor: 'transparent',
+                                color: 'white'
                             }}
                         />
                     </form>

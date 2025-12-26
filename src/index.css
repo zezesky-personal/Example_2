@@ -1,25 +1,35 @@
 :root {
-  /* Premium Color Palette */
-  --primary: #0f766e; /* Teal 700 */
-  --primary-dark: #0f5132;
-  --primary-light: #ccfbf1; /* Teal 100 */
-  --accent: #0ea5e9; /* Sky 500 */
-  --background: #f8fafc; /* Slate 50 */
-  --surface: #ffffff;
-  --text-main: #1e293b; /* Slate 800 */
-  --text-muted: #64748b; /* Slate 500 */
-  --border: #e2e8f0; /* Slate 200 */
-  
-  /* Shadows */
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  
+  /* Premium Dark Modern Palette */
+  --primary: #2dd4bf;
+  /* Teal 400 - vibrant against dark */
+  --primary-dark: #0d9488;
+  --primary-light: #134e4a;
+  /* Deep teal for background elements */
+  --accent: #38bdf8;
+  /* Sky 400 */
+  --background: #0f172a;
+  /* Slate 900 */
+  --surface: #1e293b;
+  /* Slate 800 */
+  --surface-hover: #334155;
+  /* Slate 700 */
+  --text-main: #f1f5f9;
+  /* Slate 100 */
+  --text-muted: #94a3b8;
+  /* Slate 400 */
+  --border: #334155;
+  /* Slate 700 */
+
+  /* Shadows - Adjusted for Dark Mode */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.5);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.5), 0 2px 4px -2px rgb(0 0 0 / 0.5);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.8), 0 4px 6px -4px rgb(0 0 0 / 0.8);
+
   /* Radius */
   --radius-md: 0.5rem;
   --radius-lg: 1rem;
   --radius-full: 9999px;
-  
+
   /* Fonts */
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
 }
@@ -56,12 +66,29 @@ button {
 }
 
 /* Utilities */
-.flex { display: flex; }
-.items-center { align-items: center; }
-.justify-between { justify-content: space-between; }
-.gap-4 { gap: 1rem; }
-.grid { display: grid; }
-.text-center { text-align: center; }
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.gap-4 {
+  gap: 1rem;
+}
+
+.grid {
+  display: grid;
+}
+
+.text-center {
+  text-align: center;
+}
 
 /* Components Defaults */
 .btn {

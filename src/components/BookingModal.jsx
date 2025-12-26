@@ -49,17 +49,18 @@ const BookingModal = ({ doctor, onClose }) => {
             backdropFilter: 'blur(4px)'
         }} onClick={onClose}>
             <div style={{
-                backgroundColor: 'white',
+                backgroundColor: 'var(--surface)',
                 padding: '2rem',
                 borderRadius: '16px',
                 width: '90%',
                 maxWidth: '500px',
-                boxShadow: 'var(--shadow-lg)'
+                boxShadow: 'var(--shadow-lg)',
+                border: '1px solid var(--border)'
             }} onClick={e => e.stopPropagation()}>
                 <h2 style={{ marginBottom: '1.5rem', color: 'var(--text-main)' }}>Book with {doctor.name}</h2>
 
                 <div style={{ marginBottom: '1.5rem' }}>
-                    <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>Date</label>
+                    <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500', color: 'var(--text-main)' }}>Date</label>
                     <input
                         type="date"
                         value={date}
@@ -69,13 +70,15 @@ const BookingModal = ({ doctor, onClose }) => {
                             padding: '0.75rem',
                             borderRadius: 'var(--radius-md)',
                             border: '1px solid var(--border)',
+                            backgroundColor: 'var(--background)',
+                            color: 'white',
                             fontFamily: 'inherit'
                         }}
                     />
                 </div>
 
                 <div style={{ marginBottom: '2rem' }}>
-                    <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>Time</label>
+                    <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500', color: 'var(--text-main)' }}>Time</label>
                     <select
                         value={time}
                         onChange={e => setTime(e.target.value)}
@@ -84,6 +87,8 @@ const BookingModal = ({ doctor, onClose }) => {
                             padding: '0.75rem',
                             borderRadius: 'var(--radius-md)',
                             border: '1px solid var(--border)',
+                            backgroundColor: 'var(--background)',
+                            color: 'white',
                             fontFamily: 'inherit',
                             cursor: 'pointer'
                         }}
