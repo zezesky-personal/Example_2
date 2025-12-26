@@ -12,48 +12,37 @@ function App() {
   const [doctors, setDoctors] = useState([])
   const [filteredDoctors, setFilteredDoctors] = useState([])
   const [selectedDoctor, setSelectedDoctor] = useState(null)
+  const [location, setLocation] = useState(null)
+  const [loading, setLoading] = useState(false)
 
   // Fetch data from API
+  const fetchDoctors = async (coords = null, cat = activeCategory, query = searchQuery) => {
+    setLoading(true)
+    try {
+      let url = `http://localhost:3001/api/doctors?category=${cat}`
+      if (query) url += `&query=${encodeURIComponent(query)}`
+      if (coords) url += `&lat=${coords.lat}&lng=${coords.lng}`
+
+      const res = await fetch(url)
+      const data = await res.json()
+      setDoctors(data)
+      setFilteredDoctors(data)
+    } catch (error) {
+      console.error("Error fetching data:", error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  // Initial fetch and fetch on category change
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const docRes = await fetch('http://localhost:3001/api/doctors')
-        const docs = await docRes.json()
-        setDoctors(docs)
-        setFilteredDoctors(docs)
-      } catch (error) {
-        console.error("Error fetching data:", error)
-      }
-    }
-    fetchData()
-  }, [])
-
-  // Filter Logic
-  useEffect(() => {
-    let result = doctors
-
-    // Filter by category
-    if (activeCategory !== 'all') {
-      result = result.filter(doc => doc.specialty === activeCategory)
-    }
-
-    // Filter by search query
-    if (searchQuery) {
-      const lowerQuery = searchQuery.toLowerCase()
-      result = result.filter(doc =>
-        doc.name.toLowerCase().includes(lowerQuery) ||
-        doc.specialty.toLowerCase().includes(lowerQuery) ||
-        doc.bio.toLowerCase().includes(lowerQuery) ||
-        doc.subtitle.toLowerCase().includes(lowerQuery)
-      )
-    }
-
-    setFilteredDoctors(result)
-  }, [activeCategory, searchQuery, doctors])
+    fetchDoctors(location, activeCategory, searchQuery)
+  }, [activeCategory, location])
 
   const handleSearch = (query) => {
     setSearchQuery(query)
-    // Scrolling to results
+    fetchDoctors(location, activeCategory, query)
+
     const resultsSection = document.getElementById('results')
     if (resultsSection) {
       resultsSection.scrollIntoView({ behavior: 'smooth' })
@@ -61,11 +50,28 @@ function App() {
   }
 
   const handleLocate = () => {
-    // Simulate finding location - for mock we'll just sort by distance (which are already strings like "0.8 miles")
-    // Real implementation would use Navigator.geolocation
-    alert("Simulating location... showing nearest doctors.")
-    const sorted = [...filteredDoctors].sort((a, b) => parseFloat(a.distance) - parseFloat(b.distance))
-    setFilteredDoctors(sorted)
+    if (!navigator.geolocation) {
+      alert("Geolocation is not supported by your browser")
+      return
+    }
+
+    setLoading(true)
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const coords = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        }
+        setLocation(coords)
+        fetchDoctors(coords)
+        alert("Location updated! Showing real doctor offices near you.")
+      },
+      (error) => {
+        console.error("Error getting location:", error)
+        alert("Unable to retrieve your location. Showing general results.")
+        setLoading(false)
+      }
+    )
   }
 
   return (
@@ -82,6 +88,12 @@ function App() {
           }}
         />
         <DoctorList doctors={filteredDoctors} onBook={setSelectedDoctor} />
+        {loading && <div style={{ textAlign: 'center', padding: '2rem', color: 'var(--primary)' }}>Loading results...</div>}
+        {!loading && filteredDoctors.length === 0 && (
+          <div style={{ textAlign: 'center', padding: '4rem', color: 'var(--text-muted)' }}>
+            <p>No health providers found matching your criteria in this area.</p>
+          </div>
+        )}
       </main>
 
       <BookingModal

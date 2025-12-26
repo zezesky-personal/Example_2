@@ -12,6 +12,7 @@ const DoctorCard = ({ doctor, onBook }) => {
             boxShadow: 'var(--shadow-sm)'
         }}
             className="doctor-card"
+            onClick={() => window.open(doctor.link, '_blank')}
             onMouseEnter={(e) => {
                 e.currentTarget.style.transform = 'translateY(-4px)'
                 e.currentTarget.style.boxShadow = 'var(--shadow-lg)'
